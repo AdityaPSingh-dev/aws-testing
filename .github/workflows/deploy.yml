@@ -14,10 +14,20 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
+      # Load .env file (only non-sensitive data)
+      - name: Load .env file
+        run: |
+          if [ -f .env ]; then
+            set -a
+            source .env
+            set +a
+          fi
+
+      # Execute remote SSH commands using password
       - name: Execute remote SSH commands using password
         uses: appleboy/ssh-action@v1.0.0
         with:
-          host: ${{ secrets.HOST }}
+          host: ${{ secrets.HOST }} # Keep sensitive data in GitHub Secrets
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
