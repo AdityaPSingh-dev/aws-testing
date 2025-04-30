@@ -1,4 +1,4 @@
-name: Push to EC2 instance
+name: Push-to-EC2 instance
 
 on:
   push:
@@ -14,11 +14,10 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      # Execute remote SSH commands using password
-      - name: Execute remote SSH commands using password
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.HOST }} # Keep sensitive data in GitHub Secrets
+      - name: Deploy to my EC2 instance
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          host: ${{ secrets.HOST }}
           username: ubuntu
           password: ${{ secrets.PRIVATE_SSH_KEY }}
           port: 22
