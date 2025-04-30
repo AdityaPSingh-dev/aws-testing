@@ -1,4 +1,4 @@
-cd To-do
+cd aws-Testing
 git pull origin main 
 npm install
 npm run build 
