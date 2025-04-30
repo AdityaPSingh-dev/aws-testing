@@ -14,9 +14,9 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Deploy to my EC2 instance
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
+      - name: Execute remote SSH commands using password
+        uses: appleboy/ssh-action@v1
+        with:
           host: ${{ secrets.HOST }}
           username: ubuntu
           password: ${{ secrets.PRIVATE_SSH_KEY }}
